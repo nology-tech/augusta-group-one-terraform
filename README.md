@@ -3,7 +3,7 @@
 ## Contributors
 
 - [Constantin]()
-- [Huma]()
+- [Huma](https://github.com/humashaikhc)
 - [Jay]()
 - [Oliver]()
 - [Walter]()
