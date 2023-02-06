@@ -6,6 +6,6 @@
 - [Huma]()
 - [Jay](https://github.com/JayBuckby)
 - [Oliver]()
-- [Walter]()
+- [Walter](https://github.com/waltervoynarovsky)
 
 - Coach : [Charlie](https://github.com/Charlie-robin)
