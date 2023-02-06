@@ -5,7 +5,7 @@
 - [Constantin]()
 - [Huma]()
 - [Jay]()
-- [Oliver]()
+- [Oliver](https://github.com/ovt12)
 - [Walter]()
 
 - Coach : [Charlie](https://github.com/Charlie-robin)
