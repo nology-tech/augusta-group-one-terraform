@@ -1,0 +1,11 @@
+---
+- hosts: node
+  become: yes
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Start Node-App Service
+      service:
+        name: nodeapp
+        state: started
