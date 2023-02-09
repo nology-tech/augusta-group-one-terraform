@@ -1,15 +1,15 @@
 # changes made = 'richardgurney' -> 'groupone'
 
 
-# provider "aws" {
-#   region     = "us-east-2"
-# }
-
 provider "aws" {
-  region = var.AWS_DEFAULT_REGION
-  access_key = var.AWS_ACCESS_KEY_ID
-  secret_key = var.AWS_SECRET_ACCESS_KEY
+  region     = "us-east-2"
 }
+
+# provider "aws" {
+#   region = var.AWS_DEFAULT_REGION
+#   access_key = var.AWS_ACCESS_KEY_ID
+#   secret_key = var.AWS_SECRET_ACCESS_KEY
+# }
 
 # Create our VPC
 resource "aws_vpc" "groupone-application-deployment" {
@@ -44,7 +44,7 @@ module "db-tier" {
   route_table_id = "${aws_vpc.groupone-application-deployment.main_route_table_id}"
   cidr_block              = "10.15.1.0/24" # TODO ---> Make sure the cidr block is the same across the configuration files 
   user_data               = templatefile("./scripts/database_user_data.sh", {})
-  ami_id                  = "ami-0a6bcbc3dec6aeb5a" # TODO--> Will need to insert the database ami once packer is built
+  ami_id                  = "ami-0b20dd9f7eb883ce6" # TODO--> Will need to insert the database ami once packer is built // *ADDED*
   map_public_ip_on_launch = false
 
   ingress = [
@@ -64,7 +64,7 @@ module "application-tier" {
   route_table_id          = "${aws_route_table.groupone-rt.id}"
   cidr_block              = "10.15.0.0/24" # TODO---> Make sure the cidr block is the same across the configuration files
   user_data               = templatefile("./scripts/app_user_data.sh", { mongodb_ip=module.db-tier.private_ip })
-  ami_id                  = "ami-029141d335dc40fc2" # TODO---> Will need to insert the Application ami once packer is built // ADDED GROUP ONE AMI 
+  ami_id                  = "ami-0376b05d5affe53b0" # TODO---> Will need to insert the Application ami once packer is built // *ADDED* 
   map_public_ip_on_launch = true
 
   ingress = [
