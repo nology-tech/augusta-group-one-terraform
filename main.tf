@@ -65,6 +65,7 @@ module "db-tier" {
 
 module "application-tier" {
   name                    = "groupone-app"
+  region                  = var.AWS_DEFAULT_REGION
   source                  = "./modules/application-tier"
   vpc_id                  = "${aws_vpc.groupone-application-deployment.id}"
   route_table_id          = "${aws_route_table.groupone-rt.id}"
