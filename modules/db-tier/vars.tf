@@ -32,3 +32,6 @@ variable "ingress" {
   description = "Sets the access to the network, port, and the protocol"
 }
 
+variable "region" {
+  type = string
+}
