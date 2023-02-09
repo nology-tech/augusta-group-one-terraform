@@ -1,7 +1,10 @@
 # changes made = 'richardgurney' -> 'groupone'
 
+
 provider "aws" {
-  region="us-east-2"
+  region     = "us-east-2"
+  access_key = "AWS_ACCESS_KEY_ID"
+  secret_key = "AWS_SECRET_ACCESS_KEY"
 }
 
 # Create our VPC
@@ -57,7 +60,7 @@ module "application-tier" {
   route_table_id          = "${aws_route_table.groupone-rt.id}"
   cidr_block              = "10.15.0.0/24" # TODO---> Make sure the cidr block is the same across the configuration files
   user_data               = templatefile("./scripts/app_user_data.sh", { mongodb_ip=module.db-tier.private_ip })
-  ami_id                  = "ami-0aadcd8576538f786" # TODO---> Will need to insert the Application ami once packer is built
+  ami_id                  = "ami-029141d335dc40fc2" # TODO---> Will need to insert the Application ami once packer is built // ADDED GROUP ONE AMI 
   map_public_ip_on_launch = true
 
   ingress = [
