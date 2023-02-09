@@ -35,7 +35,6 @@ resource "aws_route_table" "groupone-rt" {
 
 module "db-tier" {
   name           = "groupone-database"
-  region         = var.AWS_DEFAULT_REGION
   source         = "./modules/db-tier"
   vpc_id         = "${aws_vpc.groupone-application-deployment.id}"
   route_table_id = "${aws_vpc.groupone-application-deployment.main_route_table_id}"
@@ -56,7 +55,6 @@ module "db-tier" {
 
 module "application-tier" {
   name                    = "groupone-app"
-  region                  = var.AWS_DEFAULT_REGION
   source                  = "./modules/application-tier"
   vpc_id                  = "${aws_vpc.groupone-application-deployment.id}"
   route_table_id          = "${aws_route_table.groupone-rt.id}"
