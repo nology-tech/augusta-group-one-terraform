@@ -1,10 +1,14 @@
 # changes made = 'richardgurney' -> 'groupone'
 
 
+# provider "aws" {
+#   region     = "us-east-2"
+# }
+
 provider "aws" {
-  region     = "us-east-2"
-  access_key = "AWS_ACCESS_KEY_ID"
-  secret_key = "AWS_SECRET_ACCESS_KEY"
+  region = var.AWS_DEFAULT_REGION
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
 }
 
 # Create our VPC
