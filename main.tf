@@ -71,9 +71,9 @@ module "db-tier" {
   source         = "./modules/db-tier"
   vpc_id         = "${aws_vpc.groupone-application-deployment.id}"
   route_table_id = "${aws_vpc.groupone-application-deployment.main_route_table_id}"
-  cidr_block              = "10.15.1.0/24" # TODO ---> Make sure the cidr block is the same across the configuration files 
+  cidr_block              = "10.15.1.0/24" 
   user_data               = templatefile("./scripts/database_user_data.sh", {})
-  ami_id                  = "${data.aws_ami.db-ami.id}" # TODO--> Will need to insert the database ami once packer is built // *ADDED*
+  ami_id                  = "${data.aws_ami.db-ami.id}" 
   map_public_ip_on_launch = false
 
   ingress = [
@@ -114,9 +114,9 @@ module "application-tier" {
   source                  = "./modules/application-tier"
   vpc_id                  = "${aws_vpc.groupone-application-deployment.id}"
   route_table_id          = "${aws_route_table.groupone-rt.id}"
-  cidr_block              = "10.15.0.0/24" # TODO---> Make sure the cidr block is the same across the configuration files
+  cidr_block              = "10.15.0.0/24"
   user_data               = templatefile("./scripts/app_user_data.sh", { mongodb_ip=module.db-tier.private_ip })
-  ami_id                  = "${data.aws_ami.app-ami.id}" # TODO---> Will need to insert the Application ami once packer is built // *ADDED* 
+  ami_id                  = "${data.aws_ami.app-ami.id}" 
   map_public_ip_on_launch = true
 
   ingress = [
@@ -130,7 +130,7 @@ module "application-tier" {
       from_port   = 22 
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = "0.0.0.0/0" # TODO: <--YOU WILL NEED TO CHANGE TO YOUR IP ADDRESS FOR SECURITY!
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 }
