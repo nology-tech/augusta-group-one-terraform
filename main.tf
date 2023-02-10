@@ -43,6 +43,28 @@ resource "aws_route_table" "groupone-rt" {
   }
 }
 
+
+data "aws_ami" "db-ami" {
+
+most_recent = true 
+
+filter {
+    name   = "name"
+    values = ["augusta-image-group1-DATABASE*"]
+  }
+
+filter {
+  name = "state"
+  values = ["available"]
+}
+
+filter {
+    name = "root-device-type"
+    values = ["ebs"]
+}
+
+}
+
 module "db-tier" {
   name           = "groupone-database"
   region         = var.AWS_DEFAULT_REGION
@@ -51,7 +73,7 @@ module "db-tier" {
   route_table_id = "${aws_vpc.groupone-application-deployment.main_route_table_id}"
   cidr_block              = "10.15.1.0/24" # TODO ---> Make sure the cidr block is the same across the configuration files 
   user_data               = templatefile("./scripts/database_user_data.sh", {})
-  ami_id                  = "ami-0b20dd9f7eb883ce6" # TODO--> Will need to insert the database ami once packer is built // *ADDED*
+  ami_id                  = "${data.aws_ami.db-ami.id}" # TODO--> Will need to insert the database ami once packer is built // *ADDED*
   map_public_ip_on_launch = false
 
   ingress = [
@@ -64,6 +86,28 @@ module "db-tier" {
   ]
 }
 
+
+data "aws_ami" "app-ami" {
+
+most_recent = true 
+
+filter {
+    name   = "name"
+    values = ["augusta-image-group1-APP*"]
+  }
+
+filter {
+  name = "state"
+  values = ["available"]
+}
+
+filter {
+    name = "root-device-type"
+    values = ["ebs"]
+}
+
+}
+
 module "application-tier" {
   name                    = "groupone-app"
   region                  = var.AWS_DEFAULT_REGION
@@ -72,7 +116,7 @@ module "application-tier" {
   route_table_id          = "${aws_route_table.groupone-rt.id}"
   cidr_block              = "10.15.0.0/24" # TODO---> Make sure the cidr block is the same across the configuration files
   user_data               = templatefile("./scripts/app_user_data.sh", { mongodb_ip=module.db-tier.private_ip })
-  ami_id                  = "ami-0376b05d5affe53b0" # TODO---> Will need to insert the Application ami once packer is built // *ADDED* 
+  ami_id                  = "${data.aws_ami.app-ami.id}" # TODO---> Will need to insert the Application ami once packer is built // *ADDED* 
   map_public_ip_on_launch = true
 
   ingress = [
