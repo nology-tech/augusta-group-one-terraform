@@ -3,7 +3,7 @@
 ## TODO
 
 This is a Terraform template
-<!-- TODO ----> Type 'control + f' for windows or 'command + f' for Mac then type "TODO" to you can then edit the template and add the correct AMI configuration -->
+<!-- TODO ----> Type 'control + f' for windows or 'command + f' for Mac then type "TODO" so you can then edit the template and add the correct AMI configuration -->
 <!-- TODO ----> Will need to change the inventory.txt file ip address (THIS IP IS A SSH instance IP) -->
 <!-- TODO ----> Then once configured run terrafrom init - terraform plan - terraform apply --> This will create your VPC in AWS
 <!-- -The AWS Key is universal so everybody in the group has the same key placed in their .ssh file. -->

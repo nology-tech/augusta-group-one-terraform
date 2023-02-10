@@ -46,7 +46,7 @@ resource "aws_instance" "db" {
   user_data = "${var.user_data}"
   subnet_id = "${aws_subnet.groupone-db-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.groupone-sg-db-group.id}"]
-  key_name               =  "groupone-awskey.pem" # TODO --> can we swap this for a universal key for the group / If not enter AWS key
+  key_name               =  "groupone-awskey" 
 
   tags = {
     Name = "${var.name}"
